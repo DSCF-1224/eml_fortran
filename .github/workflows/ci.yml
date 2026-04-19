@@ -12,36 +12,36 @@ defaults:
 
 jobs:
 
-    test:
+  test:
 
-      timeout-minutes: 10
+    timeout-minutes: 10
 
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      strategy:
+    strategy:
 
-        matrix:
+      matrix:
 
-          profile: [debug, release]
-        
-        fail-fast: false
+        profile: [debug, release]
+      
+      fail-fast: false
 
-      steps:
+    steps:
 
-        - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
 
-        - name: Install fpm
+      - name: Install fpm
 
-          uses: fortran-lang/setup-fpm@v9
+        uses: fortran-lang/setup-fpm@v9
 
-          with:
+        with:
 
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-        - name: Build library using fpm
+      - name: Build library using fpm
 
-          run: fpm build --profile ${{ matrix.profile }}
+        run: fpm build --profile ${{ matrix.profile }}
 
-        - name: Test library using fpm (${{ matrix.profile }} mode)
+      - name: Test library using fpm (${{ matrix.profile }} mode)
 
-          run: fpm test --profile ${{ matrix.profile }}
+        run: fpm test --profile ${{ matrix.profile }}
