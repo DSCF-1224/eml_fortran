@@ -37,6 +37,8 @@ jobs:
 
   test:
 
+    needs: fypp
+
     timeout-minutes: 10
 
     runs-on: ubuntu-latest
