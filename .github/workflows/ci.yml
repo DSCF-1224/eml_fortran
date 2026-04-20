@@ -41,6 +41,16 @@ jobs:
           cd test
           fypp -F -DWITH_EXP              check_unary_f90.fypp check_unary_exp.f90
 
+      - name: Upload artifacts (test)
+
+        uses: actions/upload-artifact@v7
+
+        with:
+
+          name: test-f90
+          path: test/*.f90
+          retention-days: 1
+
   test:
 
     needs: fypp
