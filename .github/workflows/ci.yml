@@ -39,7 +39,7 @@ jobs:
 
         run: |
           cd test
-          fypp -F -DWITH_EXP              check_unary.fypp check_unary_exp.f90
+          fypp -F -DWITH_EXP              check_unary_f90.fypp check_unary_exp.f90
 
   test:
 
