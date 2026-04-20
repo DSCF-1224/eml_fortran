@@ -35,6 +35,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run fypp (test)
+
+        run: |
+          cd test
+          fypp -F -DWITH_EXP              check_unary.fypp check_unary_exp.f90
+
   test:
 
     needs: fypp
