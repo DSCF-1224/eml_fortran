@@ -28,6 +28,7 @@ module eml_type_fortran
     public :: atan
     public :: atanh
     public :: avg
+    public :: cmplx            ! from `eml_class_fortran`
     public :: cos
     public :: cosh
     public :: eml
