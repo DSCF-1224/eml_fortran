@@ -19,6 +19,7 @@ module eml_class_fortran
 
     public :: assignment(=)
 
+    public :: cmplx
     public :: eml_operator
     public :: ieee_is_nan
     public :: imag
@@ -46,6 +47,10 @@ module eml_class_fortran
         module procedure :: assign_real64_to_eml_real64
     end interface
 
+    interface cmplx
+        module procedure :: eml_cmplx_real64
+    end interface
+
     interface eml_operator
         module procedure :: eml_operator_real64
     end interface
@@ -65,6 +70,16 @@ module eml_class_fortran
 
 
     contains
+
+
+
+    elemental complex(real64) function eml_cmplx_real64(x)
+
+        class(eml_real64_class), intent(in) :: x
+
+        eml_cmplx_real64 = x%hidden
+
+    end function
 
 
 
