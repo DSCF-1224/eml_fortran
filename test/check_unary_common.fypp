@@ -1,0 +1,147 @@
+#:mute
+
+    #:if defined('WITH_ACOS')
+        #:set OPERATION = 'acos'
+        #:set I_MAX     =   100
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.01
+    #:endif
+
+    #:if defined('WITH_ACOSH')
+        #:set OPERATION = 'acosh'
+        #:set I_MAX     = 72
+        #:set I_MIN     =  8
+        #:set STEP      = 0.125
+    #:endif
+
+    #:if defined('WITH_ASIN')
+        #:set OPERATION = 'asin'
+        #:set I_MAX     =   100
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.01
+    #:endif
+
+    #:if defined('WITH_ASINH')
+        #:set OPERATION = 'asinh'
+        #:set I_MAX     =   64
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.125
+    #:endif
+
+    #:if defined('WITH_ATAN')
+        #:set OPERATION = 'atan'
+        #:set I_MAX     =   64
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.125
+    #:endif
+
+    #:if defined('WITH_ATANH')
+        #:set OPERATION = 'atanh'
+        #:set I_MAX     =   64
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.125
+    #:endif
+
+    #:if defined('WITH_COS')
+        #:set OPERATION = 'cos'
+        #:set I_MAX     =   160
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.125
+    #:endif
+
+    #:if defined('WITH_COSH')
+        #:set OPERATION = 'cosh'
+        #:set I_MAX     =   32
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.125
+    #:endif
+
+    #:if defined('WITH_EXP')
+        #:set OPERATION = 'exp'
+        #:set I_MAX     =   32
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.125
+    #:endif
+
+    #:if defined('WITH_HALF')
+        #:set OPERATION = 'half'
+        #:set I_MAX     =   32
+        #:set I_MIN     = - I_MAX
+        #:set STEP      = 0.125
+    #:endif
+
+    #:if defined('WITH_INV')
+        #:set OPERATION = 'inv'
+        #:set I_MAX     = 64
+        #:set I_MIN     =  1
+        #:set STEP      = 0.125
+    #:endif
+
+    #:if defined('WITH_LOG')
+        #:set OPERATION = 'log'
+        #:set I_MAX     = 64
+        #:set I_MIN     =  1
+        #:set STEP      = 0.125
+    #:endif
+
+    #:if defined('WITH_LOGISTIC_SIGMOID')
+        #:set OPERATION = 'logistic_sigmoid'
+        #:set I_MAX     =   64
+        #:set I_MIN     = - I_MAX
+        #:set STEP      = 0.125
+    #:endif
+
+    #:if defined('WITH_NEG')
+        #:set OPERATION = 'neg'
+        #:set I_MAX     =   32
+        #:set I_MIN     = - I_MAX
+        #:set STEP      = 0.125
+    #:endif
+
+    #:if defined('WITH_SIN')
+        #:set OPERATION = 'sin'
+        #:set I_MAX     =   160
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.125
+    #:endif
+
+    #:if defined('WITH_SINH')
+        #:set OPERATION = 'sinh'
+        #:set I_MAX     =   32
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.125
+    #:endif
+
+    #:if defined('WITH_SQR')
+        #:set OPERATION = 'sqr'
+        #:set I_MAX     =   32
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.125
+    #:endif
+
+    #:if defined('WITH_SQRT')
+        #:set OPERATION = 'sqrt'
+        #:set I_MAX     = 64
+        #:set I_MIN     =  1
+        #:set STEP      = 0.125
+    #:endif
+
+    #:if defined('WITH_TAN')
+        #:set OPERATION = 'tan'
+        #:set I_MAX     =   40
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.03125
+    #:endif
+
+    #:if defined('WITH_TANH')
+        #:set OPERATION = 'tanh'
+        #:set I_MAX     =   32
+        #:set I_MIN     = - I_MAX
+        #:set STEP      =   0.125
+    #:endif
+
+    #:set PROGRAM_NAME = 'check_unary_' + OPERATION
+
+    #:set DATA_FILE_NAME = PROGRAM_NAME + '.dat'
+
+#:endmute

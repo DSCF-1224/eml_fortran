@@ -1,0 +1,88 @@
+name: ci
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+
+  fypp:
+
+    timeout-minutes: 10
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+
+        with:
+
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run fypp (test)
+
+        run: |
+          cd test
+          fypp -F -DWITH_EXP              check_unary_f90.fypp check_unary_exp.f90
+
+      - name: Upload artifacts (test)
+
+        uses: actions/upload-artifact@v7
+
+        with:
+
+          name: test-f90
+          path: test/*.f90
+          retention-days: 1
+
+  test:
+
+    needs: fypp
+
+    timeout-minutes: 10
+
+    runs-on: ubuntu-latest
+
+    strategy:
+
+      matrix:
+
+        profile: [debug, release]
+      
+      fail-fast: false
+
+    steps:
+
+      - uses: actions/checkout@v6
+
+      - name: Install fpm
+
+        uses: fortran-lang/setup-fpm@v9
+
+        with:
+
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build library using fpm
+
+        run: fpm build --profile ${{ matrix.profile }}
+
+      - name: Test library using fpm (${{ matrix.profile }} mode)
+
+        run: fpm test --profile ${{ matrix.profile }}
