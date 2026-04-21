@@ -136,7 +136,6 @@ jobs:
 
           git add src/*.f90
           git add test/*.f90
-          git add example/*.f90
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
