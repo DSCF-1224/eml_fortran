@@ -19,7 +19,7 @@ program check_unary_neg
 
     integer :: i, file_unit
 
-    type(unary_data_type) :: record, trial
+    type(unary_operator_checker_type) :: record, trial
 
 
 
