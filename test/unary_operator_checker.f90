@@ -1,4 +1,4 @@
-module check_unary_config
+module unary_operator_checker
 
     use, intrinsic :: iso_fortran_env, only: real64
 
@@ -19,11 +19,11 @@ module check_unary_config
 
     public :: real64
 
-    public :: unary_data_type
+    public :: unary_operator_checker_type
 
 
 
-    type :: unary_data_type
+    type :: unary_operator_checker_type
 
         real(real64) :: r_x, r_op
 
@@ -52,7 +52,7 @@ module check_unary_config
 
     elemental complex(real64) function error(self)
 
-        class(unary_data_type), intent(in) :: self
+        class(unary_operator_checker_type), intent(in) :: self
 
         error = self%hidden_error
 
@@ -62,7 +62,7 @@ module check_unary_config
 
     elemental complex(real64) function error_scaled(self)
 
-        class(unary_data_type), intent(in) :: self
+        class(unary_operator_checker_type), intent(in) :: self
 
         error_scaled = self%hidden_error_scaled
 
@@ -72,7 +72,7 @@ module check_unary_config
 
     elemental subroutine eval_error(self)
 
-        class(unary_data_type), intent(inout) :: self
+        class(unary_operator_checker_type), intent(inout) :: self
 
 
 
@@ -97,7 +97,7 @@ module check_unary_config
 
     subroutine display(self, operation)
 
-        class(unary_data_type), intent(in) :: self
+        class(unary_operator_checker_type), intent(in) :: self
 
         character(*), intent(in) :: operation
 
@@ -110,13 +110,13 @@ module check_unary_config
         offset = repeat( ' ', len(operation) )
         
         print *
-        print *,      self%r_x  , '; ', offset, '  x      @ real64'
-        print *, real(self%e_x) , '; ', offset, '  x%re   @ eml'
-        print *, imag(self%e_x) , '; ', offset, '  x%im   @ eml'
+        print *,      self%r_x  , '; ', offset, '  x         @ real64'
+        print *, real(self%e_x) , '; ', offset, '  x%re      @ eml'
+        print *, imag(self%e_x) , '; ', offset, '  x%im      @ eml'
 
-        print *,      self%r_op  , '; ', operation, '( x    ) @ real64'
-        print *, real(self%e_op) , '; ', operation, '( x%re ) @ eml'
-        print *, imag(self%e_op) , '; ', operation, '( x%im ) @ eml'
+        print *,      self%r_op  , '; ', operation, '( x    )    @ real64'
+        print *, real(self%e_op) , '; ', operation, '( x    )%re @ eml'
+        print *, imag(self%e_op) , '; ', operation, '( x    )%im @ eml'
 
         print *, self%hidden_error%re        , '; error%re'
         print *, self%hidden_error%im        , '; error%im'
@@ -130,7 +130,7 @@ module check_unary_config
 
     elemental subroutine initialize(self)
 
-        class(unary_data_type), intent(inout) :: self
+        class(unary_operator_checker_type), intent(inout) :: self
 
         associate( nan => ieee_value(0.0_real64, ieee_quiet_nan) )
 

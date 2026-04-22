@@ -1,4 +1,4 @@
-program check_unary_log
+program check_unary_neg
     !! [SymbolicRegressionPackage/EML_toolkit/EmL_compiler/Test_C_math_h/run_unary_suite_c.py at master · VA00/SymbolicRegressionPackage](https://github.com/VA00/SymbolicRegressionPackage/blob/master/EML_toolkit/EmL_compiler/Test_C_math_h/run_unary_suite_c.py)
 
 
@@ -25,7 +25,7 @@ program check_unary_log
 
     open( &!
         newunit = file_unit , &!
-        file    = 'test/check_unary_log.dat' , &!
+        file    = 'test/check_unary_neg.dat' , &!
         status  = 'replace' &!
     )
 
@@ -37,23 +37,23 @@ program check_unary_log
 
 
 
-    do i = 1, 64
+    do i = -32, 32
 
         call trial%initialize
 
         trial%r_x  = 0.125_real64 * i
         trial%e_x  = trial%r_x
 
-        trial%r_op = log(trial%r_x)
-        trial%e_op = log(trial%e_x)
+        trial%r_op = - trial%r_x
+        trial%e_op = - trial%e_x
 
 
 
         if ( ieee_is_nan(trial%e_op) ) then
 
-            call trial%display('log')
+            call trial%display('neg')
 
-            error stop ': log(x) @ eml is NaN.'
+            error stop ': neg(x) @ eml is NaN.'
 
         end if
 
@@ -88,7 +88,7 @@ program check_unary_log
 
 
 
-    if (flag) call record%display('log')
+    if (flag) call record%display('neg')
 
 
 
@@ -96,6 +96,6 @@ program check_unary_log
 
 
 
-    print *, 'OK: log'
+    print *, 'OK: neg'
 
 end program
