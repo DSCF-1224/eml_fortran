@@ -5,9 +5,9 @@ program check_unary_exp
 
     use, intrinsic :: ieee_arithmetic, only: ieee_is_nan
 
-    use, non_intrinsic :: check_unary_config
-
     use, non_intrinsic :: eml_type_fortran
+
+    use, non_intrinsic :: unary_operator_checker
 
 
 
