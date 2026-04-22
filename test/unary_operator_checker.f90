@@ -19,11 +19,11 @@ module unary_operator_checker
 
     public :: real64
 
-    public :: unary_data_type
+    public :: unary_operator_checker_type
 
 
 
-    type :: unary_data_type
+    type :: unary_operator_checker_type
 
         real(real64) :: r_x, r_op
 
@@ -52,7 +52,7 @@ module unary_operator_checker
 
     elemental complex(real64) function error(self)
 
-        class(unary_data_type), intent(in) :: self
+        class(unary_operator_checker_type), intent(in) :: self
 
         error = self%hidden_error
 
@@ -62,7 +62,7 @@ module unary_operator_checker
 
     elemental complex(real64) function error_scaled(self)
 
-        class(unary_data_type), intent(in) :: self
+        class(unary_operator_checker_type), intent(in) :: self
 
         error_scaled = self%hidden_error_scaled
 
@@ -72,7 +72,7 @@ module unary_operator_checker
 
     elemental subroutine eval_error(self)
 
-        class(unary_data_type), intent(inout) :: self
+        class(unary_operator_checker_type), intent(inout) :: self
 
 
 
@@ -97,7 +97,7 @@ module unary_operator_checker
 
     subroutine display(self, operation)
 
-        class(unary_data_type), intent(in) :: self
+        class(unary_operator_checker_type), intent(in) :: self
 
         character(*), intent(in) :: operation
 
@@ -130,7 +130,7 @@ module unary_operator_checker
 
     elemental subroutine initialize(self)
 
-        class(unary_data_type), intent(inout) :: self
+        class(unary_operator_checker_type), intent(inout) :: self
 
         associate( nan => ieee_value(0.0_real64, ieee_quiet_nan) )
 
