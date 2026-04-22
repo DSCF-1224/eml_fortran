@@ -110,13 +110,13 @@ module check_unary_config
         offset = repeat( ' ', len(operation) )
         
         print *
-        print *,      self%r_x  , '; ', offset, '  x      @ real64'
-        print *, real(self%e_x) , '; ', offset, '  x%re   @ eml'
-        print *, imag(self%e_x) , '; ', offset, '  x%im   @ eml'
+        print *,      self%r_x  , '; ', offset, '  x         @ real64'
+        print *, real(self%e_x) , '; ', offset, '  x%re      @ eml'
+        print *, imag(self%e_x) , '; ', offset, '  x%im      @ eml'
 
-        print *,      self%r_op  , '; ', operation, '( x    ) @ real64'
-        print *, real(self%e_op) , '; ', operation, '( x%re ) @ eml'
-        print *, imag(self%e_op) , '; ', operation, '( x%im ) @ eml'
+        print *,      self%r_op  , '; ', operation, '( x    )    @ real64'
+        print *, real(self%e_op) , '; ', operation, '( x    )%re @ eml'
+        print *, imag(self%e_op) , '; ', operation, '( x    )%im @ eml'
 
         print *, self%hidden_error%re        , '; error%re'
         print *, self%hidden_error%im        , '; error%im'
