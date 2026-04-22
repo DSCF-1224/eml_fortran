@@ -5,9 +5,9 @@ program check_unary_neg
 
     use, intrinsic :: ieee_arithmetic, only: ieee_is_nan
 
-    use, non_intrinsic :: check_unary_config
-
     use, non_intrinsic :: eml_type_fortran
+
+    use, non_intrinsic :: unary_operator_checker
 
 
 
@@ -19,7 +19,7 @@ program check_unary_neg
 
     integer :: i, file_unit
 
-    type(unary_data_type) :: record, trial
+    type(unary_operator_checker_type) :: record, trial
 
 
 
