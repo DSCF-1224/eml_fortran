@@ -1,4 +1,4 @@
-module check_unary_config
+module unary_operator_checker
 
     use, intrinsic :: iso_fortran_env, only: real64
 
