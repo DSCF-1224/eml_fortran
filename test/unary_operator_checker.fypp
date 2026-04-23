@@ -1,3 +1,8 @@
+#:mute
+
+    #:set LIST_OPERATOR = ['exp', 'log', 'neg']
+
+#:endmute
 module unary_operator_checker
 
     use, intrinsic :: iso_fortran_env, only: real64
@@ -21,9 +26,9 @@ module unary_operator_checker
 
     public :: unary_operator_checker_type
 
-    public :: check_unary_exp
-    public :: check_unary_log
-    public :: check_unary_neg
+#:for OPERATOR in LIST_OPERATOR
+    public :: check_unary_${OPERATOR}$
+#:endfor
 
 
 
@@ -51,15 +56,11 @@ module unary_operator_checker
 
 
     interface
+    #:for OPERATOR in LIST_OPERATOR
 
-        module subroutine check_unary_exp
+        module subroutine check_unary_${OPERATOR}$
         end subroutine
-
-        module subroutine check_unary_log
-        end subroutine
-
-        module subroutine check_unary_neg
-        end subroutine
+    #:endfor
 
     end interface
 
