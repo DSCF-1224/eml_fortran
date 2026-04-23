@@ -40,9 +40,9 @@ jobs:
         run: |
           cd test
           fypp -F                         unary_operator_checker.fypp unary_operator_checker.f90
-          fypp -F -DWITH_EXP              check_unary_f90.fypp        check_unary_exp.f90
-          fypp -F -DWITH_LOG              check_unary_f90.fypp        check_unary_log.f90
-          fypp -F -DWITH_NEG              check_unary_f90.fypp        check_unary_neg.f90
+          fypp -F -DWITH_EXP              check_unary_operator.fypp   check_unary_exp.f90
+          fypp -F -DWITH_LOG              check_unary_operator.fypp   check_unary_log.f90
+          fypp -F -DWITH_NEG              check_unary_operator.fypp   check_unary_neg.f90
 
       - name: Upload artifacts (test)
 
