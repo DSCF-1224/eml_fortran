@@ -21,6 +21,10 @@ module unary_operator_checker
 
     public :: unary_operator_checker_type
 
+    public :: check_unary_exp
+    public :: check_unary_log
+    public :: check_unary_neg
+
 
 
     type :: unary_operator_checker_type
@@ -43,6 +47,21 @@ module unary_operator_checker
         procedure, pass :: initialize
 
     end type
+
+
+
+    interface
+
+        module subroutine check_unary_exp
+        end subroutine
+
+        module subroutine check_unary_log
+        end subroutine
+
+        module subroutine check_unary_neg
+        end subroutine
+
+    end interface
 
 
 
