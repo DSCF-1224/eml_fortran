@@ -27,21 +27,13 @@ module binary_operator_checker
 
     type, extends(operator_checker_class) :: binary_operator_checker_type
 
-        real(real64) :: r_x, r_y, r_op
+        real(real64) :: r_y
 
-        real(real64), private :: hidden_spacing
-
-        complex(real64), private :: hidden_error, hidden_error_scaled
-
-        type(eml_real64_type) :: e_x, e_y, e_op
+        type(eml_real64_type) :: e_y
 
         contains
 
-        procedure, pass :: error
-        procedure, pass :: error_scaled
-
         procedure, pass :: display
-        procedure, pass :: eval_error
         procedure, pass :: initialize
 
     end type
@@ -58,51 +50,6 @@ module binary_operator_checker
 
 
     contains
-
-
-
-    elemental complex(real64) function error(self)
-
-        class(binary_operator_checker_type), intent(in) :: self
-
-        error = self%hidden_error
-
-    end function
-
-
-
-    elemental complex(real64) function error_scaled(self)
-
-        class(binary_operator_checker_type), intent(in) :: self
-
-        error_scaled = self%hidden_error_scaled
-
-    end function
-
-
-
-    elemental subroutine eval_error(self)
-
-        class(binary_operator_checker_type), intent(inout) :: self
-
-
-
-        self%hidden_error   = cmplx   (self%e_op) - self%r_op
-        self%hidden_spacing = spacing (self%r_op)
-
-
-
-        if ( abs(self%r_op) .gt. 0.0_real64 ) then
-
-            self%hidden_error_scaled = self%hidden_error / self%hidden_spacing
-
-        else
-
-            self%hidden_error_scaled = self%hidden_error
-
-        end if
-
-    end subroutine
 
 
 
@@ -132,11 +79,7 @@ module binary_operator_checker
         print *, real(self%e_op) , '; ', operation, '( x    , y    )%re @ eml'
         print *, imag(self%e_op) , '; ', operation, '( x    , y    )%im @ eml'
 
-        print *, self%hidden_error%re        , '; error%re'
-        print *, self%hidden_error%im        , '; error%im'
-        print *, self%hidden_spacing         , ';            spacing( ', operation, '(x) )'
-        print *, self%hidden_error_scaled%re , '; error%re / spacing( ', operation, '(x) )'
-        print *, self%hidden_error_scaled%im , '; error%im / spacing( ', operation, '(x) )'
+        call self%display_error(operation)
 
     end subroutine
 
@@ -156,9 +99,7 @@ module binary_operator_checker
 
         end associate
 
-        self%hidden_spacing      = 0.0_real64
-        self%hidden_error        = 0.0_real64
-        self%hidden_error_scaled = 0.0_real64
+        call self%initialize_error
 
     end subroutine initialize
 
