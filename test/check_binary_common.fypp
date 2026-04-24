@@ -1,0 +1,16 @@
+#:mute
+
+    #:if defined('WITH_SUB')
+        #:set OPERATION = 'sub'
+        #:set I_MAX     =   16
+        #:set I_MIN     = - I_MAX
+        #:set J_MAX     =   I_MAX
+        #:set J_MIN     =   I_MIN
+        #:set STEP      =   0.5
+    #:endif
+
+    #:set PROGRAM_NAME = 'check_binary_' + OPERATION
+
+    #:set DATA_FILE_NAME = PROGRAM_NAME + '.dat'
+
+#:endmute
