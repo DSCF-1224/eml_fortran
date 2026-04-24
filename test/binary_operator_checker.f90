@@ -1,12 +1,12 @@
 module binary_operator_checker
 
+    use, intrinsic :: iso_fortran_env, only: real64
+
     use, intrinsic :: ieee_arithmetic, only: ieee_quiet_nan, ieee_value
 
 
 
     use, non_intrinsic :: eml_type_fortran
-
-    use, non_intrinsic :: operator_checker
 
 
 
@@ -25,7 +25,7 @@ module binary_operator_checker
 
 
 
-    type, extends(operator_checker_class) :: binary_operator_checker_type
+    type :: binary_operator_checker_type
 
         real(real64) :: r_x, r_y, r_op
 
