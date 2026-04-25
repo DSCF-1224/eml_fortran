@@ -1,5 +1,9 @@
 #:mute
 
+    #:if defined('WITH_ADD')
+        #:set OPERATION = 'add'
+    #:endif
+
     #:if defined('WITH_SUB')
         #:set OPERATION = 'sub'
     #:endif
