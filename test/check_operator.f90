@@ -22,4 +22,6 @@ program check_operator
 
     call check_unary_inv
 
+    call check_binary_mul
+
 end program
