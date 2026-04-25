@@ -18,4 +18,6 @@ program check_operator
 
     call check_unary_neg
 
+    call check_binary_add
+
 end program
