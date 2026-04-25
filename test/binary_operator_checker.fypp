@@ -1,6 +1,6 @@
 #:mute
 
-    #:set LIST_OPERATOR = ['add', 'sub']
+    #:set LIST_OPERATOR = ['add', 'mul', 'sub']
 
 #:endmute
 module binary_operator_checker
