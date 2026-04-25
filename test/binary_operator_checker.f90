@@ -22,6 +22,7 @@ module binary_operator_checker
     public :: binary_operator_checker_type
 
     public :: check_binary_add
+    public :: check_binary_div
     public :: check_binary_mul
     public :: check_binary_sub
 
@@ -45,6 +46,9 @@ module binary_operator_checker
     interface
 
         module subroutine check_binary_add
+        end subroutine
+
+        module subroutine check_binary_div
         end subroutine
 
         module subroutine check_binary_mul
