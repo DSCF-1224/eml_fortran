@@ -20,4 +20,6 @@ program check_operator
 
     call check_binary_add
 
+    call check_unary_inv
+
 end program
