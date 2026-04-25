@@ -1,6 +1,6 @@
 #:mute
 
-    #:set LIST_OPERATOR = ['exp', 'inv', 'log', 'neg']
+    #:set LIST_OPERATOR = ['exp', 'inv', 'log', 'neg', 'sqr']
 
 #:endmute
 module unary_operator_checker
