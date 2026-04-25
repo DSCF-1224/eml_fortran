@@ -46,6 +46,7 @@ jobs:
           fypp -F -DWITH_SUB              check_binary_operator.fypp   check_binary_sub.f90
           fypp -F -DWITH_NEG              check_unary_operator.fypp    check_unary_neg.f90
           fypp -F -DWITH_ADD              check_binary_operator.fypp   check_binary_add.f90
+          fypp -F -DWITH_INV              check_unary_operator.fypp    check_unary_inv.f90
 
       - name: Upload artifacts (test)
 
