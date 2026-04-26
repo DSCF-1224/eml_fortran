@@ -11,6 +11,8 @@ module unary_operator_checker
 
     use, non_intrinsic :: eml_type_fortran
 
+    use, non_intrinsic :: ieee_class_fortran
+
     use, non_intrinsic :: operator_checker
 
 
