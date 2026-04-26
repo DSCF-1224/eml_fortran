@@ -33,7 +33,10 @@ module operator_checker
         procedure, pass :: error
         procedure, pass :: error_scaled
 
-        procedure, pass :: display_error
+        procedure, pass, private :: display_error_kernel
+
+        procedure, pass :: display_error_binary
+        procedure, pass :: display_error_unary
         procedure, pass :: eval_error
         procedure, pass :: initialize_error
 
@@ -65,19 +68,43 @@ module operator_checker
 
 
 
-    subroutine display_error(self, operation)
+    subroutine display_error_kernel(self, operation, arg)
 
         class(operator_checker_class), intent(in) :: self
 
-        character(*), intent(in) :: operation
+        character(*), intent(in) :: operation, arg
 
 
 
         print *, self%hidden_error%re        , '; error%re'
         print *, self%hidden_error%im        , '; error%im'
-        print *, self%hidden_spacing         , ';            spacing( ', operation, '(x) )'
-        print *, self%hidden_error_scaled%re , '; error%re / spacing( ', operation, '(x) )'
-        print *, self%hidden_error_scaled%im , '; error%im / spacing( ', operation, '(x) )'
+        print *, self%hidden_spacing         , ';            spacing( ', operation, '(', arg, ') )'
+        print *, self%hidden_error_scaled%re , '; error%re / spacing( ', operation, '(', arg, ') )'
+        print *, self%hidden_error_scaled%im , '; error%im / spacing( ', operation, '(', arg, ') )'
+
+    end subroutine
+
+
+
+    subroutine display_error_binary(self, operation)
+
+        class(operator_checker_class), intent(in) :: self
+
+        character(*), intent(in) :: operation
+
+        call self%display_error_kernel(operation = operation, arg = 'x,y')
+
+    end subroutine
+
+
+
+    subroutine display_error_unary(self, operation)
+
+        class(operator_checker_class), intent(in) :: self
+
+        character(*), intent(in) :: operation
+
+        call self%display_error_kernel(operation = operation, arg = 'x')
 
     end subroutine
 

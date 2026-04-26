@@ -91,7 +91,7 @@ module binary_operator_checker
         print *, real(self%e_op) , '; ', operation, '( x    , y    )%re @ eml'
         print *, imag(self%e_op) , '; ', operation, '( x    , y    )%im @ eml'
 
-        call self%display_error(operation)
+        call self%display_error_binary(operation)
 
     end subroutine
 
