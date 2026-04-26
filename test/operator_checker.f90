@@ -35,7 +35,8 @@ module operator_checker
 
         procedure, pass, private :: display_error_kernel
 
-        procedure, pass :: display_error
+        procedure, pass :: display_error_binary
+        procedure, pass :: display_error_unary
         procedure, pass :: eval_error
         procedure, pass :: initialize_error
 
@@ -85,7 +86,19 @@ module operator_checker
 
 
 
-    subroutine display_error(self, operation)
+    subroutine display_error_binary(self, operation)
+
+        class(operator_checker_class), intent(in) :: self
+
+        character(*), intent(in) :: operation
+
+        call self%display_error_kernel(operation = operation, arg = 'x,y')
+
+    end subroutine
+
+
+
+    subroutine display_error_unary(self, operation)
 
         class(operator_checker_class), intent(in) :: self
 
