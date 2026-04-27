@@ -2,6 +2,9 @@ module binary_operator_checker
 
     use, intrinsic :: ieee_arithmetic, only: ieee_quiet_nan, ieee_value
 
+    use, intrinsic :: ieee_exceptions, only: ieee_divide_by_zero
+    use, intrinsic :: ieee_exceptions, only: ieee_get_flag
+
 
 
     use, non_intrinsic :: eml_type_fortran
