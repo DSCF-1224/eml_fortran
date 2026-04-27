@@ -60,7 +60,7 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
                 call trial%display('${OPERATION}$')
 
-                error stop ': ${OPERATION}$(x) @ eml is NaN.'
+                error stop ': ${OPERATION}$(x,y) @ eml is NaN.'
 
             end if
 

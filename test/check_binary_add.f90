@@ -49,7 +49,7 @@ submodule (binary_operator_checker) imp_check_binary_add
 
                 call trial%display('add')
 
-                error stop ': add(x) @ eml is NaN.'
+                error stop ': add(x,y) @ eml is NaN.'
 
             end if
 

@@ -49,7 +49,7 @@ submodule (binary_operator_checker) imp_check_binary_sub
 
                 call trial%display('sub')
 
-                error stop ': sub(x) @ eml is NaN.'
+                error stop ': sub(x,y) @ eml is NaN.'
 
             end if
 
