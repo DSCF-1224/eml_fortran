@@ -40,4 +40,6 @@ program check_operator
 
     call check_unary_logistic_sigmoid
 
+    call check_unary_cosh
+
 end program
