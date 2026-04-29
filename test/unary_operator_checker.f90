@@ -27,6 +27,7 @@ module unary_operator_checker
     public :: check_unary_half
     public :: check_unary_inv
     public :: check_unary_log
+    public :: check_unary_logistic_sigmoid
     public :: check_unary_neg
     public :: check_unary_sqr
     public :: check_unary_sqrt
@@ -56,6 +57,9 @@ module unary_operator_checker
         end subroutine
 
         module subroutine check_unary_log
+        end subroutine
+
+        module subroutine check_unary_logistic_sigmoid
         end subroutine
 
         module subroutine check_unary_neg
