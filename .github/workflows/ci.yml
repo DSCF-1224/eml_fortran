@@ -60,6 +60,7 @@ jobs:
           fypp -F -DWITH_SINH             check_unary_operator.fypp    check_unary_sinh.f90
           fypp -F -DWITH_TANH             check_unary_operator.fypp    check_unary_tanh.f90
           fypp -F -DWITH_COS              check_unary_operator.fypp    check_unary_cos.f90
+          fypp -F -DWITH_SIN              check_unary_operator.fypp    check_unary_sin.f90
 
       - name: Upload artifacts (test)
 
