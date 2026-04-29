@@ -33,6 +33,7 @@ module unary_operator_checker
     public :: check_unary_sinh
     public :: check_unary_sqr
     public :: check_unary_sqrt
+    public :: check_unary_tanh
 
 
 
@@ -77,6 +78,9 @@ module unary_operator_checker
         end subroutine
 
         module subroutine check_unary_sqrt
+        end subroutine
+
+        module subroutine check_unary_tanh
         end subroutine
 
     end interface

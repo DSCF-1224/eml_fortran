@@ -44,4 +44,6 @@ program check_operator
 
     call check_unary_sinh
 
+    call check_unary_tanh
+
 end program
