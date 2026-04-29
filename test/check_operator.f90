@@ -46,4 +46,6 @@ program check_operator
 
     call check_unary_tanh
 
+    call check_unary_cos
+
 end program
