@@ -48,4 +48,6 @@ program check_operator
 
     call check_unary_cos
 
+    call check_unary_sin
+
 end program
