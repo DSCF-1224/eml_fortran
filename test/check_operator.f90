@@ -30,4 +30,6 @@ program check_operator
 
     call check_unary_half
 
+    call check_binary_avg
+
 end program
