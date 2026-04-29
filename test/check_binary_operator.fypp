@@ -118,6 +118,10 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
             end if
         #:endif
+        #:if defined('WITH_HYPOT')
+            trial%r_op = hypot(trial%r_x, trial%r_y)
+            trial%e_op = hypot(trial%e_x, trial%e_y)
+        #:endif
         #:if defined('WITH_MUL')
             trial%r_op = trial%r_x * trial%r_y
             trial%e_op = trial%e_x * trial%e_y

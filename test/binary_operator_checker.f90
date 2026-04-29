@@ -29,6 +29,7 @@ module binary_operator_checker
     public :: check_binary_add
     public :: check_binary_avg
     public :: check_binary_div
+    public :: check_binary_hypot
     public :: check_binary_mul
     public :: check_binary_pow
     public :: check_binary_sub
@@ -59,6 +60,9 @@ module binary_operator_checker
         end subroutine
 
         module subroutine check_binary_div
+        end subroutine
+
+        module subroutine check_binary_hypot
         end subroutine
 
         module subroutine check_binary_mul

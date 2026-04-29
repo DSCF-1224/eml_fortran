@@ -36,4 +36,6 @@ program check_operator
 
     call check_unary_sqrt
 
+    call check_binary_hypot
+
 end program
