@@ -26,4 +26,6 @@ program check_operator
 
     call check_unary_sqr
 
+    call check_binary_div
+
 end program
