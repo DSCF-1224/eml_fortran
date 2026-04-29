@@ -49,6 +49,10 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
             trial%r_op = trial%r_x + trial%r_y
             trial%e_op = trial%e_x + trial%e_y
         #:endif
+        #:if defined('WITH_AVG')
+            trial%r_op =    (trial%r_x + trial%r_y) / 2
+            trial%e_op = avg(trial%e_x , trial%e_y)
+        #:endif
         #:if defined('WITH_DIV')
             trial%r_op = trial%r_x / trial%r_y
             trial%e_op = trial%e_x / trial%e_y

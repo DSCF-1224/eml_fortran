@@ -4,6 +4,10 @@
         #:set OPERATION = 'add'
     #:endif
 
+    #:if defined('WITH_AVG')
+        #:set OPERATION = 'avg'
+    #:endif
+
     #:if defined('WITH_DIV')
         #:set OPERATION = 'div'
     #:endif
