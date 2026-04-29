@@ -12,6 +12,10 @@
         #:set OPERATION = 'div'
     #:endif
 
+    #:if defined('WITH_HYPOT')
+        #:set OPERATION = 'hypot'
+    #:endif
+
     #:if defined('WITH_MUL')
         #:set OPERATION = 'mul'
     #:endif
