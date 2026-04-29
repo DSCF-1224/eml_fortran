@@ -29,6 +29,7 @@ module unary_operator_checker
     public :: check_unary_log
     public :: check_unary_neg
     public :: check_unary_sqr
+    public :: check_unary_sqrt
 
 
 
@@ -61,6 +62,9 @@ module unary_operator_checker
         end subroutine
 
         module subroutine check_unary_sqr
+        end subroutine
+
+        module subroutine check_unary_sqrt
         end subroutine
 
     end interface
