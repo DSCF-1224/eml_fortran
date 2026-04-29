@@ -38,4 +38,6 @@ program check_operator
 
     call check_binary_hypot
 
+    call check_unary_logistic_sigmoid
+
 end program
