@@ -9,7 +9,7 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
     module procedure ${PROGRAM_NAME}$
 
         logical :: flag
-    #:if defined('WITH_DIV')
+    #:if defined('WITH_DIV') or defined('WITH_POW')
 
         logical :: flag_diving_by_zero
     #:endif
@@ -122,6 +122,14 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
             trial%r_op = trial%r_x * trial%r_y
             trial%e_op = trial%e_x * trial%e_y
         #:endif
+        #:if defined('WITH_POW')
+            trial%r_op = trial%r_x ** trial%r_y
+            trial%e_op = trial%e_x ** trial%e_y
+
+
+
+            flag_diving_by_zero = (i .eq. 0) .and. (j .eq. 0)
+        #:endif
         #:if defined('WITH_SUB')
             trial%r_op = trial%r_x - trial%r_y
             trial%e_op = trial%e_x - trial%e_y
@@ -131,6 +139,30 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
         #:if defined('WITH_DIV')
             if ( (.not. flag_diving_by_zero) .and. ieee_is_nan(trial%e_op) ) then
+        #:elif defined('WITH_POW')
+            if (flag_diving_by_zero) then
+
+                associate( &!
+                    e_op_real_flag => .not. ieee_is_nan( real(trial%e_op) ) , &!
+                    e_op_imag_flag => .not. ieee_is_nan( imag(trial%e_op) )   &!
+                )
+
+                    if (e_op_real_flag .or. e_op_imag_flag) then
+
+                        call trial%display('${OPERATION}$')
+
+                        error stop ': ${OPERATION}$(0,0) @ eml is NOT NaN.'
+
+                    end if
+
+                end associate
+
+            else if ( ieee_is_nan(trial%e_op) ) then
+
+                call trial%display('${OPERATION}$')
+
+                error stop ': ${OPERATION}$(x,y) @ eml is NaN.'
+
         #:else
             if ( ieee_is_nan(trial%e_op) ) then
         #:endif

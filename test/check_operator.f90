@@ -32,6 +32,8 @@ program check_operator
 
     call check_binary_avg
 
+    call check_binary_pow
+
     call check_unary_sqrt
 
 end program
