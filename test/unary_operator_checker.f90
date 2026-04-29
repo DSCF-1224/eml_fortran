@@ -24,6 +24,7 @@ module unary_operator_checker
     public :: unary_operator_checker_type
 
     public :: check_unary_exp
+    public :: check_unary_half
     public :: check_unary_inv
     public :: check_unary_log
     public :: check_unary_neg
@@ -45,6 +46,9 @@ module unary_operator_checker
     interface
 
         module subroutine check_unary_exp
+        end subroutine
+
+        module subroutine check_unary_half
         end subroutine
 
         module subroutine check_unary_inv
