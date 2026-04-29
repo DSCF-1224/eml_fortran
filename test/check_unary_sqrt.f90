@@ -29,7 +29,7 @@ submodule (unary_operator_checker) imp_check_unary_sqrt
 
 
 
-        do i = 1, 64
+        do i = 0, 64
 
             call trial%initialize
 
