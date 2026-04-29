@@ -26,4 +26,12 @@ program check_operator
 
     call check_unary_sqr
 
+    call check_binary_div
+
+    call check_unary_half
+
+    call check_binary_avg
+
+    call check_unary_sqrt
+
 end program

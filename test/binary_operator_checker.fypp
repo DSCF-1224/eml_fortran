@@ -1,11 +1,14 @@
 #:mute
 
-    #:set LIST_OPERATOR = ['add', 'div', 'mul', 'sub']
+    #:set LIST_OPERATOR = ['add', 'avg', 'div', 'mul', 'sub']
 
 #:endmute
 module binary_operator_checker
 
     use, intrinsic :: ieee_arithmetic, only: ieee_quiet_nan, ieee_value
+
+    use, intrinsic :: ieee_exceptions, only: ieee_divide_by_zero
+    use, intrinsic :: ieee_exceptions, only: ieee_get_flag
 
 
 

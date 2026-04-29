@@ -2,6 +2,9 @@ module binary_operator_checker
 
     use, intrinsic :: ieee_arithmetic, only: ieee_quiet_nan, ieee_value
 
+    use, intrinsic :: ieee_exceptions, only: ieee_divide_by_zero
+    use, intrinsic :: ieee_exceptions, only: ieee_get_flag
+
 
 
     use, non_intrinsic :: eml_type_fortran
@@ -24,6 +27,7 @@ module binary_operator_checker
     public :: binary_operator_checker_type
 
     public :: check_binary_add
+    public :: check_binary_avg
     public :: check_binary_div
     public :: check_binary_mul
     public :: check_binary_sub
@@ -48,6 +52,9 @@ module binary_operator_checker
     interface
 
         module subroutine check_binary_add
+        end subroutine
+
+        module subroutine check_binary_avg
         end subroutine
 
         module subroutine check_binary_div

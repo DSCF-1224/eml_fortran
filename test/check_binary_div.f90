@@ -1,18 +1,15 @@
-#:include 'check_binary_common.fypp'
-submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
+submodule (binary_operator_checker) imp_check_binary_div
     !! [SymbolicRegressionPackage/EML_toolkit/EmL_compiler/Test_C_math_h/run_binary_suite_c.py at master · VA00/SymbolicRegressionPackage](https://github.com/VA00/SymbolicRegressionPackage/blob/master/EML_toolkit/EmL_compiler/Test_C_math_h/run_binary_suite_c.py)
 
     implicit none
 
     contains
 
-    module procedure ${PROGRAM_NAME}$
+    module procedure check_binary_div
 
         logical :: flag
-    #:if defined('WITH_DIV')
 
         logical :: flag_diving_by_zero
-    #:endif
 
         integer :: i, j, file_unit
 
@@ -22,7 +19,7 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
         open( &!
             newunit = file_unit , &!
-            file    = 'test/${DATA_FILE_NAME}$' , &!
+            file    = 'test/check_binary_div.dat' , &!
             status  = 'replace' &!
         )
 
@@ -34,26 +31,17 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
 
 
-        do i = ${I_MIN}$, ${I_MAX}$
-        do j = ${J_MIN}$, ${J_MAX}$
+        do i = -16, 16
+        do j = -16, 16
 
             call trial%initialize
 
-            trial%r_x  = ${STEP}$_real64 * i
+            trial%r_x  = 0.5_real64 * i
             trial%e_x  = trial%r_x
 
-            trial%r_y  = ${STEP}$_real64 * j
+            trial%r_y  = 0.5_real64 * j
             trial%e_y  = trial%r_y
 
-        #:if defined('WITH_ADD')
-            trial%r_op = trial%r_x + trial%r_y
-            trial%e_op = trial%e_x + trial%e_y
-        #:endif
-        #:if defined('WITH_AVG')
-            trial%r_op =    (trial%r_x + trial%r_y) / 2
-            trial%e_op = avg(trial%e_x , trial%e_y)
-        #:endif
-        #:if defined('WITH_DIV')
             trial%r_op = trial%r_x / trial%r_y
             trial%e_op = trial%e_x / trial%e_y
 
@@ -72,9 +60,9 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
                         if (r_op_flag .or. e_op_flag) then
 
-                            call trial%display('${OPERATION}$')
+                            call trial%display('div')
 
-                            error stop ': ${OPERATION}$(x,y) is NOT -inf.'
+                            error stop ': div(x,y) is NOT -inf.'
 
                         end if
 
@@ -89,9 +77,9 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
                         if (r_op_flag .or. e_op_flag) then
 
-                            call trial%display('${OPERATION}$')
+                            call trial%display('div')
 
-                            error stop ': ${OPERATION}$(x,y) is NOT +inf.'
+                            error stop ': div(x,y) is NOT +inf.'
 
                         end if
 
@@ -106,9 +94,9 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
                         if (r_op_flag .or. e_op_flag) then
 
-                            call trial%display('${OPERATION}$')
+                            call trial%display('div')
 
-                            error stop ': ${OPERATION}$(x,y) is NOT NaN.'
+                            error stop ': div(x,y) is NOT NaN.'
 
                         end if
 
@@ -117,27 +105,14 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
                 end if
 
             end if
-        #:endif
-        #:if defined('WITH_MUL')
-            trial%r_op = trial%r_x * trial%r_y
-            trial%e_op = trial%e_x * trial%e_y
-        #:endif
-        #:if defined('WITH_SUB')
-            trial%r_op = trial%r_x - trial%r_y
-            trial%e_op = trial%e_x - trial%e_y
-        #:endif
 
 
 
-        #:if defined('WITH_DIV')
             if ( (.not. flag_diving_by_zero) .and. ieee_is_nan(trial%e_op) ) then
-        #:else
-            if ( ieee_is_nan(trial%e_op) ) then
-        #:endif
 
-                call trial%display('${OPERATION}$')
+                call trial%display('div')
 
-                error stop ': ${OPERATION}$(x,y) @ eml is NaN.'
+                error stop ': div(x,y) @ eml is NaN.'
 
             end if
 
@@ -176,7 +151,7 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
 
 
-        if (flag) call record%display('${OPERATION}$')
+        if (flag) call record%display('div')
 
 
 
@@ -184,7 +159,7 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
 
 
-        print *, 'OK: ${OPERATION}$'
+        print *, 'OK: div'
 
     end procedure
 
