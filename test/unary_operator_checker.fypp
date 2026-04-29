@@ -1,6 +1,6 @@
 #:mute
 
-    #:set LIST_OPERATOR = ['cosh', 'exp', 'half', 'inv', 'log', 'logistic_sigmoid', 'neg', 'sinh', 'sqr', 'sqrt']
+    #:set LIST_OPERATOR = ['cosh', 'exp', 'half', 'inv', 'log', 'logistic_sigmoid', 'neg', 'sinh', 'sqr', 'sqrt', 'tanh']
 
 #:endmute
 module unary_operator_checker
