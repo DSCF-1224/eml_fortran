@@ -16,6 +16,10 @@
         #:set OPERATION = 'mul'
     #:endif
 
+    #:if defined('WITH_POW')
+        #:set OPERATION = 'pow'
+    #:endif
+
     #:if defined('WITH_SUB')
         #:set OPERATION = 'sub'
     #:endif
