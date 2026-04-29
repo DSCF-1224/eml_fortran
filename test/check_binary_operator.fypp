@@ -9,6 +9,10 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
     module procedure ${PROGRAM_NAME}$
 
         logical :: flag
+    #:if defined('WITH_DIV')
+
+        logical :: flag_diving_by_zero
+    #:endif
 
         integer :: i, j, file_unit
 
@@ -45,6 +49,71 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
             trial%r_op = trial%r_x + trial%r_y
             trial%e_op = trial%e_x + trial%e_y
         #:endif
+        #:if defined('WITH_DIV')
+            trial%r_op = trial%r_x / trial%r_y
+            trial%e_op = trial%e_x / trial%e_y
+
+
+
+            flag_diving_by_zero = (j .eq. 0)
+
+            if (flag_diving_by_zero) then
+
+                if (i .lt. 0) then
+
+                    associate( &!
+                        r_op_flag => .not. is_ieee_negative_inf(      trial%r_op  ) , &!
+                        e_op_flag => .not. is_ieee_negative_inf( real(trial%e_op) )   &!
+                    )
+
+                        if (r_op_flag .or. e_op_flag) then
+
+                            call trial%display('${OPERATION}$')
+
+                            error stop ': ${OPERATION}$(x,y) is NOT -inf.'
+
+                        end if
+
+                    end associate
+
+                else if (i .gt. 0) then
+
+                    associate( &!
+                        r_op_flag => .not. is_ieee_positive_inf(      trial%r_op  ) , &!
+                        e_op_flag => .not. is_ieee_positive_inf( real(trial%e_op) )   &!
+                    )
+
+                        if (r_op_flag .or. e_op_flag) then
+
+                            call trial%display('${OPERATION}$')
+
+                            error stop ': ${OPERATION}$(x,y) is NOT +inf.'
+
+                        end if
+
+                    end associate
+
+                else
+
+                    associate( &!
+                        r_op_flag => .not. ieee_is_nan(      trial%r_op  ) , &!
+                        e_op_flag => .not. ieee_is_nan( real(trial%e_op) )   &!
+                    )
+
+                        if (r_op_flag .or. e_op_flag) then
+
+                            call trial%display('${OPERATION}$')
+
+                            error stop ': ${OPERATION}$(x,y) is NOT NaN.'
+
+                        end if
+
+                    end associate
+
+                end if
+
+            end if
+        #:endif
         #:if defined('WITH_MUL')
             trial%r_op = trial%r_x * trial%r_y
             trial%e_op = trial%e_x * trial%e_y
@@ -56,11 +125,15 @@ submodule (binary_operator_checker) imp_${PROGRAM_NAME}$
 
 
 
+        #:if defined('WITH_DIV')
+            if ( (.not. flag_diving_by_zero) .and. ieee_is_nan(trial%e_op) ) then
+        #:else
             if ( ieee_is_nan(trial%e_op) ) then
+        #:endif
 
                 call trial%display('${OPERATION}$')
 
-                error stop ': ${OPERATION}$(x) @ eml is NaN.'
+                error stop ': ${OPERATION}$(x,y) @ eml is NaN.'
 
             end if
 
