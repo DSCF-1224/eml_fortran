@@ -6,6 +6,8 @@ module unary_operator_checker
 
     use, non_intrinsic :: eml_type_fortran
 
+    use, non_intrinsic :: ieee_class_fortran
+
     use, non_intrinsic :: operator_checker
 
 
@@ -88,7 +90,7 @@ module unary_operator_checker
         print *, real(self%e_op) , '; ', operation, '( x    )%re @ eml'
         print *, imag(self%e_op) , '; ', operation, '( x    )%im @ eml'
 
-        call self%display_error(operation)
+        call self%display_error_unary(operation)
 
     end subroutine
 
@@ -98,10 +100,12 @@ module unary_operator_checker
 
         class(unary_operator_checker_type), intent(inout) :: self
 
-        associate( nan => ieee_value(0.0_real64, ieee_quiet_nan) )
 
-            self%r_x  = nan
-            self%r_op = nan
+
+        call set_ieee_quiet_nan( self%r_x  )
+        call set_ieee_quiet_nan( self%r_op )
+
+        associate( nan => ieee_value(0.0_real64, ieee_quiet_nan) )
 
             self%e_x  = nan
             self%e_op = nan

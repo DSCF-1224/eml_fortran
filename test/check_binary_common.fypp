@@ -4,6 +4,10 @@
         #:set OPERATION = 'add'
     #:endif
 
+    #:if defined('WITH_DIV')
+        #:set OPERATION = 'div'
+    #:endif
+
     #:if defined('WITH_MUL')
         #:set OPERATION = 'mul'
     #:endif
