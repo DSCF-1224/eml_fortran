@@ -42,4 +42,6 @@ program check_operator
 
     call check_unary_cosh
 
+    call check_unary_sinh
+
 end program
