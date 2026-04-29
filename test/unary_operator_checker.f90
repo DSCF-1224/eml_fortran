@@ -23,6 +23,7 @@ module unary_operator_checker
 
     public :: unary_operator_checker_type
 
+    public :: check_unary_cosh
     public :: check_unary_exp
     public :: check_unary_half
     public :: check_unary_inv
@@ -46,6 +47,9 @@ module unary_operator_checker
 
 
     interface
+
+        module subroutine check_unary_cosh
+        end subroutine
 
         module subroutine check_unary_exp
         end subroutine
