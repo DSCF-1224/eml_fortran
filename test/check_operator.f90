@@ -28,4 +28,6 @@ program check_operator
 
     call check_binary_div
 
+    call check_unary_half
+
 end program
