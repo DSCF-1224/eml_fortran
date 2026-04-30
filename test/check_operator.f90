@@ -54,4 +54,6 @@ program check_operator
 
     call check_unary_asinh
 
+    call check_unary_acosh
+
 end program
