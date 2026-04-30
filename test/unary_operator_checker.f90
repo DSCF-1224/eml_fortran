@@ -25,6 +25,7 @@ module unary_operator_checker
 
     public :: check_unary_acos
     public :: check_unary_acosh
+    public :: check_unary_asin
     public :: check_unary_asinh
     public :: check_unary_atanh
     public :: check_unary_cos
@@ -61,6 +62,9 @@ module unary_operator_checker
         end subroutine
 
         module subroutine check_unary_acosh
+        end subroutine
+
+        module subroutine check_unary_asin
         end subroutine
 
         module subroutine check_unary_asinh
