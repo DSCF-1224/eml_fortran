@@ -50,4 +50,6 @@ program check_operator
 
     call check_unary_sin
 
+    call check_unary_tan
+
 end program
