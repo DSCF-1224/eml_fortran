@@ -58,4 +58,6 @@ program check_operator
 
     call check_unary_acos
 
+    call check_unary_atanh
+
 end program
