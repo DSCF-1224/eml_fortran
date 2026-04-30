@@ -52,4 +52,6 @@ program check_operator
 
     call check_unary_tan
 
+    call check_unary_asinh
+
 end program
