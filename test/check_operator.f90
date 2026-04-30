@@ -60,4 +60,6 @@ program check_operator
 
     call check_unary_atanh
 
+    call check_unary_asin
+
 end program
