@@ -67,6 +67,7 @@ jobs:
           fypp -F -DWITH_ACOS             check_unary_operator.fypp    check_unary_acos.f90
           fypp -F -DWITH_ATANH            check_unary_operator.fypp    check_unary_atanh.f90
           fypp -F -DWITH_ASIN             check_unary_operator.fypp    check_unary_asin.f90
+          fypp -F -DWITH_ATAN             check_unary_operator.fypp    check_unary_atan.f90
 
       - name: Upload artifacts (test)
 
