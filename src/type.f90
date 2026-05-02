@@ -532,7 +532,7 @@ module eml_type_fortran
 
         type(eml_real64_type), intent(in) :: x, y
 
-        eml_div_real64 = eml_mul( x , inv(y) )
+        eml_div_real64 = eml_mul( x , eml_inv(y) )
 
     end function
 
@@ -617,7 +617,7 @@ module eml_type_fortran
         call m1%set_m1
 
         eml_logistic_sigmoid_real64 = &!
-            inv( eml( x = eml_neg(x) , y = eml_exp(m1) ) )
+            eml_inv( eml( x = eml_neg(x) , y = eml_exp(m1) ) )
 
     end function
 
@@ -732,7 +732,7 @@ module eml_type_fortran
 
         call p2%set_p2
 
-        eml_sqrt_real64 = eml_pow( x = x , y = inv(p2) )
+        eml_sqrt_real64 = eml_pow( x = x , y = eml_inv(p2) )
 
     end function
 
