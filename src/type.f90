@@ -297,6 +297,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_acos_real64(x)
+        !! \( \arccos (x) \equiv \sqrt{-1} \ln ( x + \sqrt{ x - 1 } \sqrt{ x + 1 } ) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -328,6 +329,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_acosh_real64(x)
+        !! \( \operatorname{arcosh} (x) \equiv \ln ( x + \sqrt{ x - 1 } \sqrt{ x + 1 } ) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -361,6 +363,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_add_real64(x, y)
+        !! \( x + y \mapsto x - ( - y ) \)
 
         type(eml_real64_type), intent(in) :: x, y
 
@@ -371,6 +374,7 @@ module eml_type_fortran
 
 
     module elemental type(eml_real64_type) function eml_asin_real64(x)
+        !! \( \arcsin (x) \equiv \sqrt{-1} \ln ( \sqrt{ 1 - x^2 } - \sqrt{-1} x ) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -405,6 +409,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_asinh_real64(x)
+        !! \( \operatorname{arsinh} (x) \equiv \ln ( x + \sqrt{ x^2 + 1 } ) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -432,6 +437,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_atan_real64(x)
+        !! \( \arctan (x) \equiv ( \sqrt{-1} / 2 ) \ln \bigl( ( \sqrt{-1} + x ) / ( \sqrt{-1} - x ) \bigr) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -463,6 +469,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_atanh_real64(x)
+        !! \( \operatorname{artanh} \equiv ( 1 / 2 ) \ln \bigl( ( 1 + x ) / ( 1 - x ) \bigr) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -489,6 +496,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_avg_real64(x, y)
+        !! \( \operatorname{avg}(x,y) \equiv \operatorname{half}(x + y) \)
 
         type(eml_real64_type), intent(in) :: x, y
 
@@ -499,6 +507,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_cos_real64(x)
+        !! \( \cos (x) \equiv \cosh ( \sqrt{-1} x ) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -519,6 +528,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_cosh_real64(x)
+        !! \( \cosh (x) \equiv \operatorname{avg} \bigl( \exp (x) , \exp (-x) \bigr) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -529,16 +539,18 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_div_real64(x, y)
+        !! \( x / y \mapsto x \times \operatorname{inv}(y) \)
 
         type(eml_real64_type), intent(in) :: x, y
 
-        eml_div_real64 = eml_mul( x , inv(y) )
+        eml_div_real64 = eml_mul( x , eml_inv(y) )
 
     end function
 
 
 
     elemental type(eml_real64_type) function eml_eml_real64(x, y)
+        !! \( \operatorname{eml} (x,y) = \exp (x) - \ln (y) \)
 
         type(eml_real64_type), intent(in) :: x, y
 
@@ -549,6 +561,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_exp_real64(x)
+        !! \( \exp (x) \equiv \operatorname{eml}(x,1) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -567,6 +580,7 @@ module eml_type_fortran
 
 
     module elemental type(eml_real64_type) function eml_half_real64(x)
+        !! \( \operatorname{half}(x) \equiv x / 2 \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -585,6 +599,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_hypot_real64(x, y)
+        !! \( \operatorname{hypot}(x,y) \equiv \sqrt{ x^2 + y^2 } \)
 
         type(eml_real64_type), intent(in) :: x, y
 
@@ -595,6 +610,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_inv_real64(x)
+        !! \( \operatorname{inv}(x) \equiv 1 / x \mapsto \exp ( - \ln x ) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -605,6 +621,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_logistic_sigmoid_real64(x)
+        !! \( \mathop{\sigma}(x) \equiv 1 / \bigl( 1 + \exp ( - x ) \bigr) \equiv 1 / \operatorname{eml} \bigl( - x , \exp ( -1 ) \bigr) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -617,13 +634,14 @@ module eml_type_fortran
         call m1%set_m1
 
         eml_logistic_sigmoid_real64 = &!
-            inv( eml( x = eml_neg(x) , y = eml_exp(m1) ) )
+            eml_inv( eml( x = eml_neg(x) , y = eml_exp(m1) ) )
 
     end function
 
 
 
     elemental type(eml_real64_type) function eml_mul_real64(x, y)
+        !! \( x \times y \mapsto \exp \bigl( \ln (x) + \ln (y) \bigr) \)
 
         type(eml_real64_type), intent(in) :: x, y
 
@@ -634,6 +652,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_natural_log_real64(x)
+        !! \( \ln (x) \equiv \operatorname{eml} \Bigl( 1, \exp \bigl( \operatorname{eml}(1,x) \bigr) \Bigr) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -653,6 +672,7 @@ module eml_type_fortran
 
 
     module elemental type(eml_real64_type) function eml_neg_real64(x)
+        !! \( - x \mapsto ( \ln 1 ) - x \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -671,6 +691,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_pow_real64(x, y)
+        !! \( x^y \mapsto \exp ( y \times \ln x ) \)
 
         type(eml_real64_type), intent(in) :: x, y
 
@@ -681,6 +702,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_sin_real64(x)
+        !!\( \sin (x) \equiv \cos \bigl( x - ( \pi / 2 ) \bigr) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -699,6 +721,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_sinh_real64(x)
+        !! \( \sinh (x) \equiv \operatorname{eml} \bigl( x , \exp ( \cosh x ) \bigr) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -709,6 +732,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_sqr_real64(x)
+        !! \( x^2 \equiv x \times x \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -719,6 +743,11 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_sqrt_real64(x)
+        !! \( \sqrt{x} \equiv x^{1/2} \)
+        !! @note
+        !! This module did not choose \( \sqrt{x} \equiv \exp \bigl( \operatorname{half} ( \ln x ) \bigr) \)  
+        !! because the return value becomes \( + \infty \) when \( x = 0 \).
+        !! @endnote
 
         type(eml_real64_type), intent(in) :: x
 
@@ -732,13 +761,14 @@ module eml_type_fortran
 
         call p2%set_p2
 
-        eml_sqrt_real64 = eml_pow( x = x , y = inv(p2) )
+        eml_sqrt_real64 = eml_pow( x = x , y = eml_inv(p2) )
 
     end function
 
 
 
     elemental type(eml_real64_type) function eml_sub_real64(x, y)
+        !! \( x - y \mapsto \operatorname{eml} \bigl( \ln (x) , \exp (y) \bigr) \)
 
         type(eml_real64_type), intent(in) :: x, y
 
@@ -759,6 +789,7 @@ module eml_type_fortran
 
 
     elemental type(eml_real64_type) function eml_tanh_real64(x)
+        !! \( \tanh (x) \equiv \sinh (x) / \cosh (x) \)
 
         type(eml_real64_type), intent(in) :: x
 
@@ -769,6 +800,7 @@ module eml_type_fortran
 
 
     elemental subroutine set_iu_real64(self)
+        !! \( \sqrt{-1} \mapsto - \exp \Bigl( \operatorname{half} \bigl( \log ( -1 ) \bigr) \Bigr) \)
 
         class(eml_real64_type), intent(inout) :: self
 
@@ -787,6 +819,7 @@ module eml_type_fortran
 
 
     elemental subroutine set_m1_real64(self)
+        !! \( -1 \mapsto \ln (1) - 1 \)
 
         class(eml_real64_type), intent(inout) :: self
 
@@ -805,6 +838,7 @@ module eml_type_fortran
 
 
     module elemental subroutine set_p2_real64(self)
+        !! \( 2 \mapsto 1 - ( -1 ) \)
 
         class(eml_real64_type), intent(inout) :: self
 
@@ -824,6 +858,7 @@ module eml_type_fortran
 
 
     elemental subroutine set_pi_real64(self)
+        !! \( \pi \mapsto \sqrt{ - {\bigl( \ln ( -1 ) \bigr)}^2 } \)
 
         class(eml_real64_type), intent(inout) :: self
 

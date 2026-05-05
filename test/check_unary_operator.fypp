@@ -1,11 +1,12 @@
-submodule (unary_operator_checker) imp_check_unary_exp
+#:include 'check_unary_common.fypp'
+submodule (unary_operator_checker) imp_${PROGRAM_NAME}$
     !! [SymbolicRegressionPackage/EML_toolkit/EmL_compiler/Test_C_math_h/run_unary_suite_c.py at master · VA00/SymbolicRegressionPackage](https://github.com/VA00/SymbolicRegressionPackage/blob/master/EML_toolkit/EmL_compiler/Test_C_math_h/run_unary_suite_c.py)
 
     implicit none
 
     contains
 
-    module procedure check_unary_exp
+    module procedure ${PROGRAM_NAME}$
 
         logical :: flag
 
@@ -17,7 +18,7 @@ submodule (unary_operator_checker) imp_check_unary_exp
 
         open( &!
             newunit = file_unit , &!
-            file    = 'test/check_unary_exp.dat' , &!
+            file    = 'test/${DATA_FILE_NAME}$' , &!
             status  = 'replace' &!
         )
 
@@ -29,23 +30,40 @@ submodule (unary_operator_checker) imp_check_unary_exp
 
 
 
-        do i = -32, 32
+        do i = ${I_MIN}$, ${I_MAX}$
 
             call trial%initialize
 
-            trial%r_x  = 0.125_real64 * i
+            trial%r_x  = ${STEP}$_real64 * i
             trial%e_x  = trial%r_x
 
-            trial%r_op = exp(trial%r_x)
-            trial%e_op = exp(trial%e_x)
+        #:if defined('WITH_HALF')
+            trial%r_op = trial%r_x / 2
+            trial%e_op = ${OPERATION}$(trial%e_x)
+        #:elif defined('WITH_INV')
+            trial%r_op = 1.0_real64 / trial%r_x
+            trial%e_op = ${OPERATION}$(trial%e_x)
+        #:elif defined('WITH_LOGISTIC_SIGMOID')
+            trial%r_op = 1.0_real64 / ( 1.0_real64 + exp( - trial%r_x ) )
+            trial%e_op = ${OPERATION}$(trial%e_x)
+        #:elif defined('WITH_NEG')
+            trial%r_op = - trial%r_x
+            trial%e_op = - trial%e_x
+        #:elif defined('WITH_SQR')
+            trial%r_op = trial%r_x * trial%r_x
+            trial%e_op = ${OPERATION}$(trial%e_x)
+        #:else
+            trial%r_op = ${OPERATION}$(trial%r_x)
+            trial%e_op = ${OPERATION}$(trial%e_x)
+        #:endif
 
 
 
             if ( ieee_is_nan(trial%e_op) ) then
 
-                call trial%display('exp')
+                call trial%display('${OPERATION}$')
 
-                error stop ': exp(x) @ eml is NaN.'
+                error stop ': ${OPERATION}$(x) @ eml is NaN.'
 
             end if
 
@@ -80,7 +98,7 @@ submodule (unary_operator_checker) imp_check_unary_exp
 
 
 
-        if (flag) call record%display('exp')
+        if (flag) call record%display('${OPERATION}$')
 
 
 
@@ -88,7 +106,7 @@ submodule (unary_operator_checker) imp_check_unary_exp
 
 
 
-        print *, 'OK: exp'
+        print *, 'OK: ${OPERATION}$'
 
     end procedure
 

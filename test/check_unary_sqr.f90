@@ -1,11 +1,11 @@
-submodule (unary_operator_checker) imp_check_unary_exp
+submodule (unary_operator_checker) imp_check_unary_sqr
     !! [SymbolicRegressionPackage/EML_toolkit/EmL_compiler/Test_C_math_h/run_unary_suite_c.py at master · VA00/SymbolicRegressionPackage](https://github.com/VA00/SymbolicRegressionPackage/blob/master/EML_toolkit/EmL_compiler/Test_C_math_h/run_unary_suite_c.py)
 
     implicit none
 
     contains
 
-    module procedure check_unary_exp
+    module procedure check_unary_sqr
 
         logical :: flag
 
@@ -17,7 +17,7 @@ submodule (unary_operator_checker) imp_check_unary_exp
 
         open( &!
             newunit = file_unit , &!
-            file    = 'test/check_unary_exp.dat' , &!
+            file    = 'test/check_unary_sqr.dat' , &!
             status  = 'replace' &!
         )
 
@@ -36,16 +36,16 @@ submodule (unary_operator_checker) imp_check_unary_exp
             trial%r_x  = 0.125_real64 * i
             trial%e_x  = trial%r_x
 
-            trial%r_op = exp(trial%r_x)
-            trial%e_op = exp(trial%e_x)
+            trial%r_op = trial%r_x * trial%r_x
+            trial%e_op = sqr(trial%e_x)
 
 
 
             if ( ieee_is_nan(trial%e_op) ) then
 
-                call trial%display('exp')
+                call trial%display('sqr')
 
-                error stop ': exp(x) @ eml is NaN.'
+                error stop ': sqr(x) @ eml is NaN.'
 
             end if
 
@@ -80,7 +80,7 @@ submodule (unary_operator_checker) imp_check_unary_exp
 
 
 
-        if (flag) call record%display('exp')
+        if (flag) call record%display('sqr')
 
 
 
@@ -88,7 +88,7 @@ submodule (unary_operator_checker) imp_check_unary_exp
 
 
 
-        print *, 'OK: exp'
+        print *, 'OK: sqr'
 
     end procedure
 

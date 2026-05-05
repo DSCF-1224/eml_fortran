@@ -1,0 +1,137 @@
+module binary_operator_checker
+
+    use, intrinsic :: ieee_arithmetic, only: ieee_quiet_nan, ieee_value
+
+    use, intrinsic :: ieee_exceptions, only: ieee_divide_by_zero
+    use, intrinsic :: ieee_exceptions, only: ieee_get_flag
+
+
+
+    use, non_intrinsic :: eml_type_fortran
+
+    use, non_intrinsic :: ieee_class_fortran
+
+    use, non_intrinsic :: operator_checker
+
+
+
+
+    implicit none
+
+
+
+    private
+
+    public :: real64
+
+    public :: binary_operator_checker_type
+
+    public :: check_binary_add
+    public :: check_binary_avg
+    public :: check_binary_div
+    public :: check_binary_hypot
+    public :: check_binary_mul
+    public :: check_binary_pow
+    public :: check_binary_sub
+
+
+
+    type, extends(operator_checker_class) :: binary_operator_checker_type
+
+        real(real64) :: r_y
+
+        type(eml_real64_type) :: e_y
+
+        contains
+
+        procedure, pass :: display
+        procedure, pass :: initialize
+
+    end type
+
+
+
+    interface
+
+        module subroutine check_binary_add
+        end subroutine
+
+        module subroutine check_binary_avg
+        end subroutine
+
+        module subroutine check_binary_div
+        end subroutine
+
+        module subroutine check_binary_hypot
+        end subroutine
+
+        module subroutine check_binary_mul
+        end subroutine
+
+        module subroutine check_binary_pow
+        end subroutine
+
+        module subroutine check_binary_sub
+        end subroutine
+
+    end interface
+
+
+
+    contains
+
+
+
+    subroutine display(self, operation)
+
+        class(binary_operator_checker_type), intent(in) :: self
+
+        character(*), intent(in) :: operation
+
+
+
+        character(:), allocatable :: offset
+
+
+
+        offset = repeat( ' ', len(operation) )
+        
+        print *
+        print *,      self%r_x  , '; ', offset, '  x                @ real64'
+        print *,      self%r_y  , '; ', offset, '         y         @ real64'
+        print *, real(self%e_x) , '; ', offset, '  x%re             @ eml'
+        print *, imag(self%e_x) , '; ', offset, '  x%im             @ eml'
+        print *, real(self%e_y) , '; ', offset, '         y%re      @ eml'
+        print *, imag(self%e_y) , '; ', offset, '         y%im      @ eml'
+
+        print *,      self%r_op  , '; ', operation, '( x    , y    )    @ real64'
+        print *, real(self%e_op) , '; ', operation, '( x    , y    )%re @ eml'
+        print *, imag(self%e_op) , '; ', operation, '( x    , y    )%im @ eml'
+
+        call self%display_error_binary(operation)
+
+    end subroutine
+
+
+
+    elemental subroutine initialize(self)
+
+        class(binary_operator_checker_type), intent(inout) :: self
+
+
+
+        call set_ieee_quiet_nan( self%r_x  )
+        call set_ieee_quiet_nan( self%r_op )
+
+        associate( nan => ieee_value(0.0_real64, ieee_quiet_nan) )
+
+            self%e_x  = nan
+            self%e_op = nan
+
+        end associate
+
+        call self%initialize_error
+
+    end subroutine initialize
+
+end module
