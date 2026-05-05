@@ -5,6 +5,9 @@ Fortran implementation of the EML (Exp-Minus-Log) operator
 eml(x, y) = exp(x) - log(y)
 ```
 
+[![CI](https://github.com/dscf-1224/eml_fortran/actions/workflows/ci.yml/badge.svg)](https://github.com/dscf-1224/eml_fortran/actions/workflows/ci.yml)
+
+
 ## Background
 
 - Odrzywołek, A. (2026). *All elementary functions from a single operator.* (CC BY 4.0)
