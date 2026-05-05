@@ -10,5 +10,6 @@ display: public
 source: true
 proc_internals: true
 graph: true
+graph_maxdepth: 2
 license: mit
 ---
