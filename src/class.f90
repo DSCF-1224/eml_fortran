@@ -94,6 +94,7 @@ module eml_class_fortran
 
 
     elemental complex(real64) function eml_operator_real64(x, y)
+        !! \( \operatorname{eml} (x,y) = \exp (x) - \ln (y) \)
 
         class(eml_real64_class), intent(in) :: x, y
 
